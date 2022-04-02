@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+
+    db:
+        image: postgres:14
+        environment:
+            POSTGRES_USER: api_user
+            POSTGRES_PASSWORD: password
+        volumes:
+            - db:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+
+    nginx:
+      build:
+          context: ./docker/nginx
+      depends_on:
+          - api
+      volumes:
+          - ./api:/srv/app
+      ports:
+            - 80:80
+
+    api:
+      build:
+          context: ./docker/php
+          args:
+            UID: ${UID:-1000}
+      volumes:
+          - ./api:/srv/app
+      depends_on:
+          - db
+
+    # adminer:
+    #   image: adminer
+    #   restart: always
+    #   ports:
+    #     - 8080:8080
+
+volumes:
+    db:
