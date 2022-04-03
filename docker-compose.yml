@@ -28,6 +28,10 @@ services:
             UID: ${UID:-1000}
       volumes:
           - ./api:/srv/app
+      environment:
+            APP_ENV: dev
+            APP_SECRET: 23337e2ac740123cd56bfc5a06e2abb2
+            DATABASE_URL: postgresql://api_user:password@db:5432/testing_symfo_ddd_hexa
       depends_on:
           - db
 
