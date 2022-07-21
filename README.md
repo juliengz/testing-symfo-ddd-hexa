@@ -17,4 +17,4 @@ docker-compose run --rm --no-deps api bin/console doc:data:create --if-not-exist
 docker-compose run --rm --no-deps api bin/console --env=test doctrine:database:create
 docker-compose run --rm --no-deps api bin/console --env=test doctrine:schema:create
 
-
+TEST
